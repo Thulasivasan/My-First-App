@@ -33,13 +33,13 @@ if uploaded_file:
             st.stop()
 
         st.subheader("Original File Preview")
-        st.write(df)
+        st.write(df.head(3))
 
         # Clean column names
         cleaned_df = clean_column_names(df)
 
         st.subheader("Cleaned File Preview")
-        st.write(cleaned_df)
+        st.write(cleaned_df.head(3))
 
         # Download cleaned file
         st.download_button(
