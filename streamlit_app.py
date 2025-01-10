@@ -9,22 +9,19 @@ def clean_column_names(df):
     ]
     return df
 
-# Set unlimited upload size
-st.set_option("server.maxUploadSize", 0)
-
 # Streamlit app
-st.title("Spreadsheet Cleaner - Unlimited Upload Size")
+st.title("Spreadsheet Cleaner")
 
 # File upload
 uploaded_file = st.file_uploader("Upload your spreadsheet (Excel or CSV)", type=["csv", "xlsx"])
 
 if uploaded_file:
+    # Read the file
     try:
-        # Read the file based on its extension
         if uploaded_file.name.endswith(".csv"):
             df = pd.read_csv(uploaded_file)
         elif uploaded_file.name.endswith(".xlsx"):
-            # Check if openpyxl is installed
+            # Import openpyxl if not already installed
             try:
                 import openpyxl
             except ImportError:
@@ -51,6 +48,5 @@ if uploaded_file:
             file_name="cleaned_file.csv",
             mime="text/csv",
         )
-
     except Exception as e:
         st.error(f"An error occurred while processing the file: {e}")
